@@ -13,11 +13,10 @@
     "@react-navigation/bottom-tabs": "^6.5.20",
     "@react-navigation/native": "^6.1.17",
     "@react-navigation/stack": "^6.3.29",
-    "babel-preset-expo": "^55.0.21",
-    "expo": "~54.0.0",
-    "expo-linking": "^55.0.15",
+    "babel-preset-expo": "~54.0.10",
+    "expo": "~54.0.34",
+    "expo-linking": "~8.0.12",
     "expo-location": "~19.0.8",
-    "expo-router": "~6.0.23",
     "expo-status-bar": "~3.0.9",
     "react": "19.1.0",
     "react-dom": "^19.1.0",
@@ -29,8 +28,8 @@
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
-    "@types/react": "~18.2.79",
-    "typescript": "~5.3.3"
+    "@types/react": "~19.1.10",
+    "typescript": "~5.9.2"
   },
   "private": true
 }
