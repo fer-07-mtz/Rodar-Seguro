@@ -33,12 +33,7 @@
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
-      [
-        "expo-location",
-        {
-          "locationAlwaysAndWhenInUsePermission": "Rodar Seguro necesita tu ubicación para mostrar puntos de riesgo cercanos."
-        }
-      ]
+      []
     ],
     "extra": {
       "eas": {
