@@ -28,19 +28,17 @@
         "android.permission.ACCESS_COARSE_LOCATION",
         "android.permission.ACCESS_FINE_LOCATION"
       ]
+    }
     },
+    
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "plugins": [
-      [
-        "expo-location"
-      ]
-    ],
+    "plugins": [],
+    
     "extra": {
       "eas": {
         "projectId": "268e7380-f42a-4621-9c6b-7b6f4f716b9c"
       }
     }
-  }
 }

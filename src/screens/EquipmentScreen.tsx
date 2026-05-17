@@ -7,6 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+// ─── IMPORTAMOS EL TEMA ───────────────────────────────────────────────────────
+// useTheme nos da acceso a los colores del tema actual desde el contexto global
+import { useTheme } from './ThemeContext';
 
 // Tipo para cada pieza de equipo
 type Equipo = {
@@ -140,7 +143,8 @@ const colorPorNivel = {
 };
 
 export default function EquipmentScreen() {
-  // Estado para saber cuál tarjeta está expandida
+  // Obtenemos los colores del tema activo para aplicarlos a esta pantalla
+  const { colores } = useTheme();
   const [expandido, setExpandido] = useState<number | null>(null);
 
   const toggleExpandido = (id: number) => {
@@ -148,22 +152,22 @@ export default function EquipmentScreen() {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={[styles.container, { backgroundColor: colores.fondo }]} showsVerticalScrollIndicator={false}>
       {/* Encabezado */}
-      <View style={styles.header}>
-        <Text style={styles.headerTitulo}>Equipo de Protección</Text>
-        <Text style={styles.headerSubtitulo}>
+      <View style={[styles.header, { backgroundColor: colores.tarjeta }]}>
+        <Text style={[styles.headerTitulo, { color: colores.texto }]}>Equipo de Protección</Text>
+        <Text style={[styles.headerSubtitulo, { color: colores.subtexto }]}>
           El equipo adecuado puede ser la diferencia entre sobrevivir y no hacerlo.
           Invierte en tu seguridad.
         </Text>
       </View>
 
       {/* Leyenda de niveles */}
-      <View style={styles.leyendaRow}>
+      <View style={[styles.leyendaRow, { backgroundColor: colores.tarjeta }]}>
         {Object.entries(colorPorNivel).map(([nivel, color]) => (
           <View key={nivel} style={styles.leyendaItem}>
             <View style={[styles.leyendaDot, { backgroundColor: color }]} />
-            <Text style={styles.leyendaTexto}>{nivel}</Text>
+            <Text style={[styles.leyendaTexto, { color: colores.subtexto }]}>{nivel}</Text>
           </View>
         ))}
       </View>
@@ -174,6 +178,7 @@ export default function EquipmentScreen() {
           key={equipo.id}
           style={[
             styles.tarjeta,
+              { backgroundColor: colores.tarjeta, borderColor: colores.borde },
             expandido === equipo.id && {
               borderColor: colorPorNivel[equipo.nivel],
             },
@@ -185,7 +190,7 @@ export default function EquipmentScreen() {
           <View style={styles.tarjetaHeader}>
             <Text style={styles.tarjetaEmoji}>{equipo.emoji}</Text>
             <View style={styles.tarjetaInfo}>
-              <Text style={styles.tarjetaNombre}>{equipo.nombre}</Text>
+              <Text style={[styles.tarjetaNombre, { color: colores.texto }]}>{equipo.nombre}</Text>
               <View
                 style={[
                   styles.badge,
@@ -212,9 +217,9 @@ export default function EquipmentScreen() {
           {/* Contenido expandible */}
           {expandido === equipo.id && (
             <View style={styles.tarjetaContenido}>
-              <Text style={styles.descripcion}>{equipo.descripcion}</Text>
+              <Text style={[styles.descripcion, { color: colores.subtexto }]}>{equipo.descripcion}</Text>
 
-              <Text style={styles.subtitulo}>¿Qué buscar?</Text>
+              <Text style={[styles.subtitulo, { color: colores.texto }]}>¿Qué buscar?</Text>
               {equipo.caracteristicas.map((caract, i) => (
                 <View key={i} style={styles.caracteristicaRow}>
                   <Ionicons name="checkmark-circle" size={16} color="#7ED321" />
@@ -242,7 +247,6 @@ export default function EquipmentScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F0F1A',
     padding: 16,
   },
   header: {

@@ -1,3 +1,4 @@
+import { useTheme } from './ThemeContext';
 import React, { useState, useRef, useEffect } from 'react';
 import {
   View,
@@ -82,7 +83,8 @@ const pasosAccidente = [
 ];
 
 export default function EmergencyScreen() {
-  // Estado para el contador de activación del SOS
+  // Obtenemos los colores del tema activo para aplicarlos a esta pantalla
+  const { colores } = useTheme();
   const [presionando, setPresionando] = useState<boolean>(false);
   const [activado, setActivado] = useState<boolean>(false);
   const [contador, setContador] = useState<number>(3);
@@ -181,7 +183,7 @@ export default function EmergencyScreen() {
   };
 
   return (
-    <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
+    <ScrollView style={[styles.container, { backgroundColor: colores.fondo }]} showsVerticalScrollIndicator={false}>
       {/* Banner de advertencia */}
       <View style={styles.advertencia}>
         <Ionicons name="warning" size={18} color="#F5A623" />
@@ -192,10 +194,10 @@ export default function EmergencyScreen() {
 
       {/* Botón SOS principal */}
       <View style={styles.sosSection}>
-        <Text style={styles.sosTitulo}>
+        <Text style={[styles.sosTitulo, { color: colores.texto }]}>
           {activado ? '🚨 SOS ACTIVADO' : 'Botón de Emergencia'}
         </Text>
-        <Text style={styles.sosSubtitulo}>
+        <Text style={[styles.sosSubtitulo, { color: colores.subtexto }]}>
           {activado
             ? 'Alerta enviada. Ayuda en camino...'
             : presionando
@@ -234,19 +236,19 @@ export default function EmergencyScreen() {
       </View>
 
       {/* Contactos de emergencia */}
-      <Text style={styles.seccionTitulo}>📞 Números de Emergencia</Text>
+      <Text style={[styles.seccionTitulo, { color: colores.texto }]}>📞 Números de Emergencia</Text>
       <View style={styles.contactosGrid}>
         {contactosEmergencia.map((contacto, i) => (
           <TouchableOpacity
             key={i}
-            style={styles.contactoCard}
+            style={[styles.contactoCard, { backgroundColor: colores.tarjeta, borderColor: colores.borde }]}
             onPress={() => handleLlamar(contacto)}
             activeOpacity={0.8}
           >
             <View style={[styles.contactoIcono, { backgroundColor: contacto.color + '22' }]}>
               <Ionicons name={contacto.icono} size={24} color={contacto.color} />
             </View>
-            <Text style={styles.contactoNombre}>{contacto.nombre}</Text>
+            <Text style={[styles.contactoNombre, { color: colores.subtexto }]}>{contacto.nombre}</Text>
             <Text style={[styles.contactoNumero, { color: contacto.color }]}>
               {contacto.numero}
             </Text>
@@ -255,15 +257,15 @@ export default function EmergencyScreen() {
       </View>
 
       {/* Pasos en caso de accidente */}
-      <Text style={styles.seccionTitulo}>🚑 ¿Qué hacer en un accidente?</Text>
+      <Text style={[styles.seccionTitulo, { color: colores.texto }]}>🚑 ¿Qué hacer en un accidente?</Text>
       {pasosAccidente.map((paso) => (
-        <View key={paso.numero} style={styles.pasoCard}>
+        <View key={paso.numero} style={[styles.pasoCard, { backgroundColor: colores.tarjeta, borderColor: colores.borde }]}>
           <View style={[styles.pasoNumero, { backgroundColor: paso.color }]}>
             <Text style={styles.pasoNumeroTexto}>{paso.numero}</Text>
           </View>
           <View style={styles.pasoInfo}>
-            <Text style={styles.pasoTitulo}>{paso.titulo}</Text>
-            <Text style={styles.pasoDescripcion}>{paso.descripcion}</Text>
+            <Text style={[styles.pasoTitulo, { color: colores.texto }]}>{paso.titulo}</Text>
+            <Text style={[styles.pasoDescripcion, { color: colores.subtexto }]}>{paso.descripcion}</Text>
           </View>
         </View>
       ))}
@@ -276,7 +278,6 @@ export default function EmergencyScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#0F0F1A',
     padding: 16,
   },
   advertencia: {
