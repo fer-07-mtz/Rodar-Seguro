@@ -7,7 +7,7 @@
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "dark",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/splash-icon.png",
       "resizeMode": "contain",
       "backgroundColor": "#0F0F1A"
     },
@@ -50,7 +50,7 @@
           "useGoogleMapsOnAndroid": false
         }
       ]
-      ]
+    ],
     "extra": {
       "eas": {
         "projectId": "268e7380-f42a-4621-9c6b-7b6f4f716b9c"
